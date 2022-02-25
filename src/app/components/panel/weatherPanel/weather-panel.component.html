@@ -1,0 +1,33 @@
+<app-header text="Weather"></app-header>
+<div class="row">
+  <div class="col-3">
+    <app-block [idx]=196 icon="cloud-sun" title="Outside"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [idx]=1 icon="cloud-sun" title="Weather"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [idx]=110 icon="cloud" title="Clouds"></app-block>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <app-block [idx]=2 icon="fas fa-wind" title="Wind"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [idx]=3 icon="sun" title="UV"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [idx]=111 icon="thermometer-half" title="Apparent T."></app-block>
+  </div>
+</div>
+
+<div class="row">
+  <app-block [idx]=140 icon="cloud" title="Forecast 3h"></app-block>
+</div>
+
+<div class="row">
+  <app-block [idx]=10 icon="cloud" title="Forecast d"></app-block>
+  <app-sunrise-block></app-sunrise-block>
+</div>

@@ -1,0 +1,25 @@
+<app-header text="Mi Robot"></app-header>
+<div class="row">
+  <div class="col-3">
+    <app-block [hideOffLevel]="false" [idx]=90 icon="cogs" title="Status"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [idx]=92 icon="battery-three-quarters" title="Battery"></app-block>
+  </div>
+  <div class="col-3">
+    <app-block [dataIsUpdateTime]="true" [idx]=93 icon="paint-brush" title="Last Clean"></app-block>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-1">
+    <app-block [clickable]="true" [idx]=94 icon="cogs" title="Command"></app-block>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-1">
+    <app-block [clickable]="true" [idx]=95 icon="asterisk" title="Fan Control"></app-block>
+  </div>
+</div>
+

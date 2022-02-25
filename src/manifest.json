@@ -1,0 +1,39 @@
+{
+  "manifest_version": 5,
+  "short_name": "Smart UI",
+  "name": "Smart Home UI",
+  "theme_color": "#2b2b2b",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/ui/1",
+  "icons": [
+    {
+      "src": "/ui/assets/favicon/favicon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "/ui/assets/favicon/mediumtile.png",
+      "type": "image/png",
+      "sizes": "150x150",
+      "purpose": "any"
+    },
+    {
+      "src": "/ui/assets/favicon/largetile.png",
+      "type": "image/png",
+      "sizes": "310x310",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/ui/assets/favicon/splash.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [],
+  "description": "Smart Home UI",
+  "screenshots": []
+}

@@ -1,0 +1,50 @@
+.top-bar {
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.nav-buttons {
+  padding: 2px;
+  text-decoration: none;
+  display: inline-block;
+  color: #c7c7c7;
+  border-radius: 2px;
+}
+
+.nav-buttons a {
+  padding: 2px;
+  text-decoration: none;
+  display: inline-block;
+  color: #a4a4a4;
+  background-color: #262626;
+  border-radius: 2px;
+  margin-left: 5px;
+}
+
+.nav-buttons a:hover {
+  color: #e7e7e7;
+  background-color: #676767;
+}
+
+.nav-buttons a.active {
+  color: #cecece;
+  background-color: #3a3a3a;
+}
+
+.blink {
+  font-size: 0.3rem;
+  vertical-align: middle;
+  animation: blinker 3s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+}
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

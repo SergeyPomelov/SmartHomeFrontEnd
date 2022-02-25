@@ -1,0 +1,41 @@
+<div (click)="onClick()" class="{{blockClass}}">
+  <div class="row">
+    <div class="col-1 block-icon"><em class="{{iconClass}}"></em></div>
+    <div class="col-1 block-title">{{title}}</div>
+  </div>
+  <div class="row">
+    <div *ngIf="data" class="block-data">
+      {{data}}
+      <em (click)="upVariable()" *ngIf="this.device?.Type === 'Thermostat'" class="up fas fa-plus"></em>
+      <em (click)="downVariable()" *ngIf="this.device?.Type === 'Thermostat'" class="down fas fa-minus"></em>
+    </div>
+  </div>
+
+  <div *ngIf="device?.SwitchType === 'Selector'" class="selector-options row">
+    <select *ngIf="device?.SelectorStyle === 1">
+      <ng-container *ngFor="let option of options; let i = index">
+        <option *ngIf="!(hideOffLevel && option.name === 'Off')"
+                [attr.disabled]="!clickable"
+                [selected]="option === selectedOption"
+                [value]="option">
+          {{option.name}}
+        </option>
+      </ng-container>
+    </select>
+
+    <div *ngIf="device?.SelectorStyle === 0">
+      <ng-container *ngFor="let option of options; let i = index">
+        <label *ngIf="!(hideOffLevel && option.name === 'Off')"
+               [class]="option === selectedOption ? 'btn btn-default active' : 'btn btn-default'">
+          <input (click)="selected(option)"
+                 [checked]="option === selectedOption"
+                 autocomplete="off"
+                 name="options"
+                 [value]="option.level"
+                 type="radio">
+          {{option.name}}
+        </label>
+      </ng-container>
+    </div>
+  </div>
+</div>

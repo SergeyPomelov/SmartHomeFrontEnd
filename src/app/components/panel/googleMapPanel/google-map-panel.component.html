@@ -1,0 +1,9 @@
+<div>
+  <google-map *ngIf="apiLoaded | async"
+              [center]="{lat: 54.852452, lng: 83.100735}"
+              [options]="{fullscreenControl: true, streetViewControl: false, mapTypeControl: false}"
+              [zoom]="13"
+              width="95%">
+    <map-traffic-layer></map-traffic-layer>
+  </google-map>
+</div>

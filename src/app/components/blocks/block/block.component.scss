@@ -1,0 +1,72 @@
+@import "src/app/components/blocks/blocks";
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 0 4px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-default:active, .btn-default.active {
+  color: #222222;
+  background-color: #f2f2f2;
+  border-color: #ededed;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default.focus {
+  color: #222222;
+  background-color: #afafaf;
+  border-color: #ededed;
+}
+
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+select {
+  max-width: 100px;
+  min-width: 100px;
+  width: 100px !important;
+}
+
+.col-button1 {
+  width: 31px;
+  height: 100%;
+}
+
+.up {
+  margin-left: 10px;
+  height: 50%;
+  width: 22px;
+  color: #b0b0b0
+}
+
+.down {
+  height: 50%;
+  width: 22px;
+  color: #b0b0b0
+}
+
+.selector-options {
+  margin-top: 5px;
+}
+

@@ -1,0 +1,11 @@
+<div class="block">
+  <div class="row">
+    <div class="col-1 block-icon"><em class="far fa-sun"></em></div>
+    <div class="col-1 block-title">Sunrise</div>
+  </div>
+  <div class="row">
+    <div *ngIf="data" class="block-data">
+      {{data.Sunrise}} - {{data.Sunset}}
+    </div>
+  </div>
+</div>
