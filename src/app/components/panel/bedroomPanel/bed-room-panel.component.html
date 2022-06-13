@@ -1,16 +1,13 @@
 <app-header text="Bed Room"></app-header>
 <div class="row">
-  <div class="col-4">
+  <div class="col-3">
+    <app-block [clickable]="true" [idx]="266" icon="lightbulb" title="Light"></app-block>
+  </div>
+  <div class="col-3">
     <app-block [clickable]="true" [idx]="80" icon="lightbulb" title="Lamp"></app-block>
   </div>
-  <div class="col-4">
-    <app-block [clickable]="true" [idx]="188" icon="lightbulb" title="Plant Lamp"></app-block>
-  </div>
-  <div class="col-4">
-    <app-block [idx]=237 icon="tint" title="Humidity"></app-block>
-  </div>
-  <div class="col-4">
-    <app-block [idx]="187" icon="cloud" title="CO2"></app-block>
+  <div class="col-3">
+    <app-block [idx]=176 icon="fire" title="T. Set"></app-block>
   </div>
 </div>
 <div class="row">
@@ -21,18 +18,20 @@
     <app-block [clickable]="true" [idx]="117" icon="asterisk" title="Fan"></app-block>
   </div>
   <div class="col-3">
-    <app-block [clickable]="true" [idx]="118" icon="thermometer-three-quarters"
-               title="Heater"></app-block>
+    <app-block [clickable]="true" [idx]="118" icon="thermometer-three-quarters" title="Heater"></app-block>
   </div>
 </div>
 <div class="row">
-  <div class="col-3">
-    <app-block [idx]=176 icon="fire" title="T. Set"></app-block>
-  </div>
-  <div class="col-3">
+  <div class="col-4">
     <app-block [idx]="207" icon="thermometer-half" title="Target"></app-block>
   </div>
-  <div class="col-3">
+  <div class="col-4">
     <app-block [idx]="236" icon="thermometer-half" title="Temperature"></app-block>
+  </div>
+  <div class="col-4">
+    <app-block [idx]=237 icon="tint" title="Humidity"></app-block>
+  </div>
+  <div class="col-4">
+    <app-block [idx]="187" icon="cloud" title="CO2"></app-block>
   </div>
 </div>

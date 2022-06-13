@@ -1,3 +1,4 @@
+import {APP_BASE_HREF} from '@angular/common'
 import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http'
 import {NgModule} from '@angular/core'
 import {GoogleMapsModule} from '@angular/google-maps'
@@ -73,6 +74,7 @@ import {AppComponent} from './app.component'
   providers: [
     CookieService,
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
+    { provide: APP_BASE_HREF, useValue: '/ui' }
   ],
   bootstrap: [AppComponent],
 })

@@ -18,7 +18,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "baseHref": "/ui/",
-            "deployUrl": "/ui/",
             "outputPath": "dist/SmartHomeFrontEnd",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,7 +31,8 @@
               "src/robots.txt"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/fontawesome/css/all.min.css"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -108,7 +108,8 @@
               "src/robots.txt"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/fontawesome/css/all.min.css"
             ],
             "scripts": []
           }
