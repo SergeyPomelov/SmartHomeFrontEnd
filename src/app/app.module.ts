@@ -17,7 +17,7 @@ import {HeaderComponent} from 'src/app/components/header/header.component'
 import {BedRoomPanelComponent} from 'src/app/components/panel/bedroomPanel/bed-room-panel.component'
 import {DevicesPanelComponent} from 'src/app/components/panel/devicesPanel/devices-panel.component'
 import {GoogleMapPanelComponent} from 'src/app/components/panel/googleMapPanel/google-map-panel.component'
-import {HallwayPanelComponent} from 'src/app/components/panel/hallwayPanel/hallway-panel.component'
+import {KitchenHallwayPanelComponent} from 'src/app/components/panel/hallwayPanel/kitchen-hallway-panel.component'
 import {LivingRoomPanelComponent} from 'src/app/components/panel/livingRoomPanel/living-room-panel.component'
 import {MiRobotPanelComponent} from 'src/app/components/panel/miRobotPanel/mi-robot-panel.component'
 import {PlantPanelComponent} from 'src/app/components/panel/plantPanel/plant-panel.component'
@@ -47,7 +47,7 @@ import {AppComponent} from './app.component'
     HeaderComponent,
     BedRoomPanelComponent,
     LivingRoomPanelComponent,
-    HallwayPanelComponent,
+    KitchenHallwayPanelComponent,
     StatePanelComponent,
     MiRobotPanelComponent,
     WeatherPanelComponent,
