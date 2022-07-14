@@ -7,10 +7,10 @@ export function getIconClass(device: Device | undefined, iconName: string): stri
   }
 
   const on = device?.Status === 'On' || device?.SwitchType === 'Contact' && device?.Status === 'Open'
-  const light = (device?.Type === 'Light/Switch' || device?.Type === 'Color Switch')
-    && device.SubType !== 'Selector Switch'
+  const switchWithOnOffStates = (device?.Type === 'Light/Switch' || device?.Type === 'Color Switch')
+    && device.SwitchType !== 'Selector'
 
-  let addon = !on && light ? ' icon-off' : ''
+  let addon = !on && switchWithOnOffStates ? ' icon-off' : ''
   if (iconName === LIGHT_BULB_ICON) {
     addon += on ? ' fas' : ' far'
     return 'fa-' + iconName + addon

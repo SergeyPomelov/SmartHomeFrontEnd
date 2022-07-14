@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http'
 import {Injectable, OnDestroy} from '@angular/core'
 import {BehaviorSubject, Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
+import {CookieService} from 'ngx-cookie-service'
 import {Device, DomoticzData, DomoticzWSRequest, DomoticzWSResponse} from 'src/app/api.types'
 import {WebsocketService} from 'src/app/websocket.service'
 import {environment} from 'src/environments/environment'
@@ -9,6 +10,7 @@ import {environment} from 'src/environments/environment'
 const API = `https://${environment.apiUrl}/json.htm?`
 const API_COMMAND = API + 'type=command&'
 const BACK_UNRESPONSIVE_LIMIT_MS = 300000
+const DEVICES_STATE_KEY = 'devicesState'
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +26,16 @@ export class DomoticzService implements OnDestroy {
   private sunriseSubject = new BehaviorSubject<DomoticzData | undefined>(undefined)
   private lastUpdateTimestamp = Date.now()
 
-  constructor(private http: HttpClient, private socket: WebsocketService) {
+  constructor(private http: HttpClient, private socket: WebsocketService, private cookie: CookieService) {
 
     this.loadDevices()
     this.loadScenes()
+    const state = localStorage.getItem(DEVICES_STATE_KEY)
+    if (state) {
+      console.log('Load saved state.')
+      this.parseDevices(JSON.parse(state))
+    }
+
     this.loadDeviceHandler = setInterval(() => this.loadDevices(), 60000)
     setInterval(() => this.loadScenes(), 60000)
 
@@ -77,24 +85,33 @@ export class DomoticzService implements OnDestroy {
     }
   }
 
-
   loadDevices(): void {
-    this.http.get<DomoticzData>(`${API}type=devices`).pipe(
-      tap(
-        (response: DomoticzData) => {
-          if (response.Sunrise && response.Sunset) {
-            this.sunrise = response
-            this.sunriseSubject.next(this.sunrise)
-          }
-          if (response.result) {
-            response.result.forEach(updatedDevice => {
-              this.updateDevice(updatedDevice)
-            })
-            this.devices = new Map(response.result.map(device => [parseInt(device.idx, 10), device]))
-            this.lastUpdateTimestamp = Date.now()
-          }
+    this.http.get<DomoticzData>(`${API}type=devices`, ).pipe(
+      tap((response: DomoticzData) => {
+        if (response) {
+          this.cookie.set('devicesStateJsonVersion', `{version:1,timestamp:${Date.now()}}`, undefined,'/ui')
+          localStorage.setItem(DEVICES_STATE_KEY, JSON.stringify(response))
+          this.parseDevices(response)
+        }
         }),
     ).subscribe()
+  }
+
+  private parseDevices(response: DomoticzData): void {
+    if (!response) {
+      return
+    }
+    if (response.Sunrise && response.Sunset) {
+      this.sunrise = response
+      this.sunriseSubject.next(this.sunrise)
+    }
+    if (response.result) {
+      response.result.forEach(updatedDevice => {
+        this.updateDevice(updatedDevice)
+      })
+      this.devices = new Map(response.result.map(device => [parseInt(device.idx, 10), device]))
+      this.lastUpdateTimestamp = Date.now()
+    }
   }
 
   loadScenes(): void {
@@ -192,10 +209,14 @@ export class DomoticzService implements OnDestroy {
   private processWsMessage(msg: DomoticzWSResponse): void {
     if (msg && msg.data && msg.event === 'response' && msg.request === 'device_request') {
       const parsedData: DomoticzData = JSON.parse(msg.data)
-      if (parsedData.result && parsedData.result.length > 0) {
-        const updatedDevice: Device = parsedData.result[0]
-        this.updateDevice(updatedDevice)
-      }
+      this.processJson(parsedData)
+    }
+  }
+
+  private processJson(parsedData: DomoticzData): void {
+    if (parsedData && parsedData.result && parsedData.result.length > 0) {
+      const updatedDevice: Device = parsedData.result[0]
+      this.updateDevice(updatedDevice)
     }
   }
 
