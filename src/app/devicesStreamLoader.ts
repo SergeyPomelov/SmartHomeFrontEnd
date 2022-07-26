@@ -9,7 +9,7 @@ import {Device, DomoticzData} from 'src/app/api.types'
 })
 export class DevicesStreamLoader {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   loadDevices(observable: Observable<HttpEvent<DomoticzData>>, updateDevice: (device: Device) => void): void {
     let handled = 0

@@ -1,6 +1,6 @@
 {
   "name": "smart-home-front-end",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "ng": "ng",
     "start-dev": "ng serve",

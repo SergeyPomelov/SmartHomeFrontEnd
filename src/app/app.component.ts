@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core'
 import {CookieService} from 'ngx-cookie-service'
+import {DomoticzService} from 'src/app/domoticz.service'
 import {environment} from 'src/environments/environment'
 import {Router, RouterOutlet} from '@angular/router'
 import {slideInAnimation} from 'src/app/animations'
@@ -15,11 +16,12 @@ export class AppComponent implements OnInit {
 
   backgroundStyle = `background-image: url(${environment.baseDir + 'img/bg12.jpg'})`
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, private cookieService: CookieService, private domoticzService: DomoticzService) {
   }
 
   ngOnInit(): void {
-    this.cookieService.set('kath', 'vlvaoddhporiwprhskjd', 7, '/', undefined, true, 'Strict')
+    this.cookieService.set(environment.theCookieName, environment.theCookieValue, 7, '/', undefined, true, 'Strict')
+    this.domoticzService.initialize()
     this.initHammer()
   }
 
