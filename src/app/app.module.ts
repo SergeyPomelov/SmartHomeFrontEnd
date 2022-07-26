@@ -64,13 +64,13 @@ import {AppComponent} from './app.component'
     ColorPickerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      registrationStrategy: 'registerWhenStable:30000',
+      registrationStrategy: 'registerWhenStable:5000',
     }),
   ],
   providers: [
     CookieService,
     {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
-    { provide: APP_BASE_HREF, useValue: '/ui' }
+    {provide: APP_BASE_HREF, useValue: '/ui'},
   ],
   bootstrap: [AppComponent],
 })

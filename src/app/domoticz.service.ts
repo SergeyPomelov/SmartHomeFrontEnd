@@ -98,16 +98,15 @@ export class DomoticzService implements OnDestroy {
     }
   }
 
-  loadDevices(): Observable<DomoticzData> {
-    return this.http.get<DomoticzData>(`${API}type=devices&filter=all&used=true&displayhidden=0`).pipe(
-      tap((response: DomoticzData) => {
-        if (response) {
-          this.cookie.set('devicesStateJsonVersion', `{version:1,timestamp:${Date.now()}}`, undefined, '/ui')
-          localStorage.setItem(DEVICES_STATE_KEY, JSON.stringify(response))
-          this.parseDevices(response)
-        }
-      }),
-    )
+  loadDevices() {
+    return this.http.get<DomoticzData>(`${API}type=devices&filter=all&used=true&displayhidden=0`)
+    .subscribe((response) => {
+      if (response) {
+        this.cookie.set('devicesStateJsonVersion', `{version:1,timestamp:${Date.now()}}`, undefined, '/ui')
+        localStorage.setItem(DEVICES_STATE_KEY, JSON.stringify(response))
+        this.parseDevices(response)
+      }
+    })
   }
 
   private parseDevices(response: DomoticzData): void {

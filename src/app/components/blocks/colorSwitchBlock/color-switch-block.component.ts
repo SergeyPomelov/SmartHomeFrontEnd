@@ -116,4 +116,8 @@ export class ColorSwitchBlockComponent implements OnInit {
       this.cpPosition = 'bottom-left'
     }
   }
+
+  public id(): string {
+    return 'cp-' + this.title
+  }
 }

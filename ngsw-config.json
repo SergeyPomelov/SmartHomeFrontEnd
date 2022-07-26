@@ -31,23 +31,13 @@
     {
       "name": "images",
       "urls": [
-        "/ui/img/"
+        "/img/**",
+        "/assets/**"
       ],
       "cacheConfig": {
         "strategy": "performance",
-        "maxSize": 10000,
-        "maxAge": "1d"
-      }
-    },
-    {
-      "name": "static-js",
-      "urls": [
-        "/ui/resources/js/"
-      ],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 10000,
-        "maxAge": "1d"
+        "maxSize": 100000,
+        "maxAge": "7d"
       }
     }
   ]

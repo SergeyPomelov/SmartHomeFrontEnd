@@ -5,7 +5,7 @@
     "ng": "ng",
     "start-dev": "ng serve",
     "start-prod-like": "ng build && http-server -p 8888 -c-1 dist/SmartHomeFrontEnd",
-    "build": "ng --configuration=production build",
+    "build": "ng --configuration=production --aot build && gzipper c ./dist ./dist-compressed/",
     "bundle-report": "ng build --stats-json && webpack-bundle-analyzer dist/SmartHomeFrontEnd/stats.json",
     "analyze": "webpack-bundle-analyzer dist/SmartHomeFrontEnd/stats.json",
     "test": "ng test"

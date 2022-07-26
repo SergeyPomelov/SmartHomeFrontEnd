@@ -2,6 +2,7 @@
   <div class="row">
     <div (click)="onClick()" class="col-3 block-icon"><em class="{{iconClass}}"></em></div>
     <div *ngIf="device?.Type === 'Color Switch'" class="col-3 block-color-picker">
+      <span style="display: none"><label for="{{id()}}" style="visibility: hidden">{{id()}}</label></span>
       <input (colorPickerClose)="onColorChoice($event)" [cpAlphaChannel]="'forced'"
              (colorPickerOpen)="onColorChoiceStart()"
              [cpPosition]="cpPosition"
@@ -9,8 +10,10 @@
              [style.background]="colorHex"
              inputmode='none'
              [cpOutputFormat]="'rgba'"
+             id="{{id()}}"
              style="cursor: pointer"/>
     </div>
     <div class="col-1 block-title">{{title}} {{device?.Level}}%</div>
   </div>
+
 </div>

@@ -1,11 +1,12 @@
 {
-  "manifest_version": 5,
+  "manifest_version": 7,
   "short_name": "Smart UI",
   "name": "Smart Home UI",
   "theme_color": "#2b2b2b",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
+  "id": "/ui/1",
   "start_url": "/ui/1",
   "icons": [
     {
