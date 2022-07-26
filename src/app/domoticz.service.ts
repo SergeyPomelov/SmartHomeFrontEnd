@@ -32,7 +32,13 @@ export class DomoticzService implements OnDestroy {
               private cookie: CookieService,
               private devicesStreamLoader: DevicesStreamLoader) {
 
-    // const state = localStorage.getItem(DEVICES_STATE_KEY)
+    const state = localStorage.getItem(DEVICES_STATE_KEY)
+    if (state) {
+      console.log("State load.")
+      this.parseDevices(JSON.parse(state))
+      console.log("State loaded.")
+    }
+
     devicesStreamLoader.loadDevices(this.http.get<DomoticzData>(
       `${API}type=devices&filter=all&used=true&displayhidden=0&favorite=1`,
       {observe: 'events', reportProgress: true, responseType: 'text' as 'json'}),
