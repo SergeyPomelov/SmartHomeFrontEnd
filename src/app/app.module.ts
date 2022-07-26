@@ -24,9 +24,6 @@ import {PlantPanelComponent} from 'src/app/components/panel/plantPanel/plant-pan
 import {PowerPanelComponent} from 'src/app/components/panel/powerPanel/power-panel.component'
 import {ServerPanelComponent} from 'src/app/components/panel/serverPanel/server-panel.component'
 import {StatePanelComponent} from 'src/app/components/panel/statePanel/state-panel.component'
-import {
-  WeatherForecastPanelComponent,
-} from 'src/app/components/panel/weatherForecastPanel/weather-forecast-panel.component'
 import {WeatherPanelComponent} from 'src/app/components/panel/weatherPanel/weather-panel.component'
 import {AppInterceptor} from 'src/app/http.interseptor'
 import {FirstPageComponent} from 'src/app/pages/1/first-page.component'
@@ -54,7 +51,6 @@ import {AppComponent} from './app.component'
     ServerPanelComponent,
     PowerPanelComponent,
     DevicesPanelComponent,
-    WeatherForecastPanelComponent,
     GoogleMapPanelComponent,
     PlantPanelComponent,
   ],

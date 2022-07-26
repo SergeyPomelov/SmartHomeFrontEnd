@@ -9,7 +9,6 @@
         "files": [
           "/index.html",
           "/manifest.json",
-          "/resources/**",
           "/*.css",
           "/*.js"
         ]

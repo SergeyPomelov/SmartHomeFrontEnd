@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
 import {CookieService} from 'ngx-cookie-service'
 import {Device, DomoticzData, DomoticzWSRequest, DomoticzWSResponse} from 'src/app/api.types'
+import {DevicesStreamLoader} from 'src/app/devicesStreamLoader'
 import {WebsocketService} from 'src/app/websocket.service'
 import {environment} from 'src/environments/environment'
 
@@ -26,15 +27,18 @@ export class DomoticzService implements OnDestroy {
   private sunriseSubject = new BehaviorSubject<DomoticzData | undefined>(undefined)
   private lastUpdateTimestamp = Date.now()
 
-  constructor(private http: HttpClient, private socket: WebsocketService, private cookie: CookieService) {
+  constructor(private http: HttpClient,
+              private socket: WebsocketService,
+              private cookie: CookieService,
+              private devicesStreamLoader: DevicesStreamLoader) {
 
-    this.loadDevices()
+    // const state = localStorage.getItem(DEVICES_STATE_KEY)
+    devicesStreamLoader.loadDevices(this.http.get<DomoticzData>(
+      `${API}type=devices&filter=all&used=true&displayhidden=0&favorite=1`,
+      {observe: 'events', reportProgress: true, responseType: 'text' as 'json'}),
+      this.updateDevice.bind(this))
+
     this.loadScenes()
-    const state = localStorage.getItem(DEVICES_STATE_KEY)
-    if (state) {
-      console.log('Load saved state.')
-      this.parseDevices(JSON.parse(state))
-    }
 
     this.loadDeviceHandler = setInterval(() => this.loadDevices(), 60000)
     setInterval(() => this.loadScenes(), 60000)
@@ -86,7 +90,7 @@ export class DomoticzService implements OnDestroy {
   }
 
   loadDevices(): void {
-    this.http.get<DomoticzData>(`${API}type=devices`, ).pipe(
+    this.http.get<DomoticzData>(`${API}type=devices&filter=all&used=true&displayhidden=0`).pipe(
       tap((response: DomoticzData) => {
         if (response) {
           this.cookie.set('devicesStateJsonVersion', `{version:1,timestamp:${Date.now()}}`, undefined,'/ui')
@@ -172,7 +176,8 @@ export class DomoticzService implements OnDestroy {
   }
 
   setColor(idx: number, color: string, brightness: number): Observable<DomoticzData> {
-    return this.command(idx, 'setcolbrightnessvalue', `hex=${color}&brightness=${brightness}&iswhite=${color === 'ffffff'}`)
+    return this.command(idx, 'setcolbrightnessvalue',
+      `hex=${color}&brightness=${brightness}&iswhite=${color === 'ffffff'}`)
   }
 
   switchLight(idx: number, switchcmd: string, additionalParams?: string): Observable<DomoticzData> {
@@ -220,8 +225,9 @@ export class DomoticzService implements OnDestroy {
     }
   }
 
-  private updateDevice(device: Device): void {
+  updateDevice(device: Device): void {
     const id = parseInt(device.idx, 10)
+    this.devices.set(id, device)
     const subject = this.devicesSubjects.get(id)
     if (subject) {
       subject.next(device)
@@ -230,6 +236,7 @@ export class DomoticzService implements OnDestroy {
 
   private updateScene(scene: Device): void {
     const id = parseInt(scene.idx, 10)
+    this.scenes.set(id, scene)
     const subject = this.sceneSubjects.get(id)
     if (subject) {
       subject.next(scene)
