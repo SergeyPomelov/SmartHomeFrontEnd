@@ -64,7 +64,7 @@ import {AppComponent} from './app.component'
     ColorPickerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      registrationStrategy: 'registerWhenStable:5000',
+      registrationStrategy: 'registerImmediately',
     }),
   ],
   providers: [
