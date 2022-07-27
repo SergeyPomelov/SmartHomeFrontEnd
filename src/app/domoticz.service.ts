@@ -53,8 +53,9 @@ export class DomoticzService implements OnDestroy {
     }
 
     this.loadDeviceHandler = setInterval(() => this.loadDevices(), 60000)
+
+    setTimeout(() => this.loadScenes(), 1000)
     setInterval(() => this.loadScenes(), 60000)
-    this.loadScenes()
 
     this.socket.wsOpen.subscribe((value) => {
       if (value) {
@@ -134,7 +135,7 @@ export class DomoticzService implements OnDestroy {
   }
 
   private parseDevices(response: DomoticzData): void {
-    console.log(response)
+    // console.log(response)
     if (!response) {
       console.error("Bad Domoticz response.")
       console.error(response)
