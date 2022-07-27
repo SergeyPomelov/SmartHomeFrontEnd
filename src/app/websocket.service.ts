@@ -26,7 +26,7 @@ export class WebsocketService {
   }
 
   public connect() {
-    console.log('Websocket connection.')
+    console.log('Websocket connecting.')
     this.subject = webSocket({
       url: `wss://${environment.apiUrl}/json`,
       protocol: 'domoticz',

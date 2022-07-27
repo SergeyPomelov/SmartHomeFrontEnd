@@ -5,8 +5,9 @@
   "theme_color": "#2b2b2b",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "/",
-  "id": "/ui/1",
+  "prefer_related_applications": true,
+  "scope": "/ui/",
+  "id": "/ui/",
   "start_url": "/ui/1",
   "icons": [
     {

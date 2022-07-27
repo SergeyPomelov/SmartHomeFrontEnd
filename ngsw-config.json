@@ -16,8 +16,7 @@
     },
     {
       "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
+      "installMode": "prefetch",
       "resources": {
         "files": [
           "/img/**",
@@ -29,10 +28,11 @@
   ],
   "dataGroups": [
     {
-      "name": "images",
+      "version": 1,
+      "name": "assets",
       "urls": [
-        "/img/**",
-        "/assets/**"
+        "/ui/img/**",
+        "/ui/assets/**"
       ],
       "cacheConfig": {
         "strategy": "performance",

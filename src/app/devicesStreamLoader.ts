@@ -1,4 +1,4 @@
-import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http'
+import {HttpClient, HttpDownloadProgressEvent, HttpEvent, HttpEventType, HttpProgressEvent} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 import {Observable} from 'rxjs'
 import {filter, map} from 'rxjs/operators'
@@ -20,10 +20,7 @@ export class DevicesStreamLoader {
 
     observable
     .pipe(
-      filter((e: any) => {
-        // console.log(e)
-        return e.type === HttpEventType.DownloadProgress && e.partialText
-      }),
+      filter((e: any) =>  e.type === HttpEventType.DownloadProgress && e.partialText),
       map(e => e.partialText.replaceAll('\t', '').trim().split('\n')))
     .subscribe((arr: string[]) => {
       let entityStart = false

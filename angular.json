@@ -26,7 +26,6 @@
             "assets": [
               "src/img",
               "src/assets",
-              "src/resources",
               "src/manifest.json",
               "src/robots.txt"
             ],
@@ -103,7 +102,6 @@
             "assets": [
               "src/img",
               "src/assets",
-              "src/resources",
               "src/manifest.json",
               "src/robots.txt"
             ],
