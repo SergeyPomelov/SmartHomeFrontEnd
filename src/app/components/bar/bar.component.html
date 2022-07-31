@@ -1,7 +1,8 @@
 <div class="top-bar">
-  <em *ngIf="wsOffline()" class="fa fa-circle blink">&#160;&#160;</em>
+  <em *ngIf="updating()" class="fa fa-arrows-rotate blink">&#160;&#160;</em>
+  <em *ngIf="wsOffline()" class="fa fa-rss blink">&#160;&#160;</em>
   {{date | date: "EEEE d.MM&#160;&#160;&#160;HH:mm:ss"}}
-  <em *ngIf="offline()" class="fa fa-circle blink">&#160;&#160;</em>
+  <em *ngIf="offline()" class="fa fa-globe blink">&#160;&#160;</em>
   <span class="nav-buttons">
     <a routerLink="/1" routerLinkActive="active">1</a>
     <a routerLink="/2" routerLinkActive="active">2</a>

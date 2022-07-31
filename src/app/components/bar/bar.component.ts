@@ -22,6 +22,10 @@ export class BarComponent {
     return this.domoticzService.isWsOffline()
   }
 
+  updating(): boolean {
+    return this.domoticzService.updating()
+  }
+
   offline(): boolean {
     return this.domoticzService.isOffline()
   }

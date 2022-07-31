@@ -1,7 +1,7 @@
 import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http'
 import {Injectable, OnDestroy} from '@angular/core'
 import {BehaviorSubject, Observable} from 'rxjs'
-import {filter, map, tap} from 'rxjs/operators'
+import {filter, finalize, tap} from 'rxjs/operators'
 import {CookieService} from 'ngx-cookie-service'
 import {Device, DomoticzData, DomoticzWSRequest, DomoticzWSResponse} from 'src/app/api.types'
 import {DevicesStreamLoader} from 'src/app/devicesStreamLoader'
@@ -19,6 +19,7 @@ const DEVICES_STATE_KEY = 'devicesState'
 export class DomoticzService implements OnDestroy {
 
   private readonly state: DomoticzData | null = null
+  private isUpdating = false
   private gotWsInitialState = false
   private devices = new Map<number, Device>()
   private scenes = new Map<number, Device>()
@@ -47,14 +48,14 @@ export class DomoticzService implements OnDestroy {
   initialize() {
 
     if (!this.state) {
-      this.fetchState()
+      setTimeout(() => this.fetchState(), 100)
     } else {
-      setTimeout(() => this.fetchState(), 3000)
+      setTimeout(() => this.fetchState(), 500)
     }
 
     this.loadDeviceHandler = setInterval(() => this.loadDevices(), 60000)
 
-    setTimeout(() => this.loadScenes(), 1000)
+    setTimeout(() => this.loadScenes(), 2000)
     setInterval(() => this.loadScenes(), 60000)
 
     this.socket.wsOpen.subscribe((value) => {
@@ -119,8 +120,11 @@ export class DomoticzService implements OnDestroy {
     const observable: Observable<HttpEvent<DomoticzData>> = this.http.get<DomoticzData>(
       `${API}type=devices&filter=all&used=true&displayhidden=0&favorite=1`,
       {observe: 'events', reportProgress: true, responseType: 'text' as 'json'})
+    this.isUpdating = true
 
-    observable.pipe(filter((r: any) => {return r.type === HttpEventType.Response && r.body}))
+    observable.pipe(
+      filter((r: any) => {return r.type === HttpEventType.Response && r.body}),
+      finalize(() => this.isUpdating = false),)
     .subscribe((r: any) => {
       this.parseDevices(JSON.parse(r.body))
       this.saveState(JSON.parse(r.body))
@@ -151,6 +155,7 @@ export class DomoticzService implements OnDestroy {
       })
       this.devices = new Map(response.result.map(device => [parseInt(device.idx, 10), device]))
       this.lastUpdateTimestamp = Date.now()
+      this.isUpdating = false
     }
   }
 
@@ -235,6 +240,10 @@ export class DomoticzService implements OnDestroy {
 
   isWsOffline(): boolean {
     return !this.socket.wsOpen.value
+  }
+
+  updating(): boolean {
+    return this.isUpdating
   }
 
   isOffline(): boolean {
