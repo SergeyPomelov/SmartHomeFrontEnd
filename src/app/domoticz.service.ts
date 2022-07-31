@@ -48,9 +48,9 @@ export class DomoticzService implements OnDestroy {
   initialize() {
 
     if (!this.state) {
-      setTimeout(() => this.fetchState(), 100)
+      setTimeout(() => this.fetchState(), 50)
     } else {
-      setTimeout(() => this.fetchState(), 500)
+      setTimeout(() => this.fetchState(), 300)
     }
 
     this.loadDeviceHandler = setInterval(() => this.loadDevices(), 60000)
