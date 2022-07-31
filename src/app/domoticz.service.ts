@@ -19,7 +19,7 @@ const DEVICES_STATE_KEY = 'devicesState'
 export class DomoticzService implements OnDestroy {
 
   private readonly state: DomoticzData | null = null
-  private isUpdating = false
+  private isUpdating = true
   private gotWsInitialState = false
   private devices = new Map<number, Device>()
   private scenes = new Map<number, Device>()
