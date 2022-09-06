@@ -112,9 +112,6 @@ export class ColorSwitchBlockComponent implements OnInit {
     if (this.title === DEFAULT_TITLE) {
       this.title = this.device.Name
     }
-    if (this.title === 'Gateway') {
-      this.cpPosition = 'bottom-left'
-    }
   }
 
   public id(): string {
