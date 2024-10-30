@@ -1,5 +1,12 @@
 # SmartHomeFrontEnd
 
+![Repository Top Language](https://img.shields.io/github/languages/top/SergeyPomelov/SmartHomeFrontEnd)
+![Languages](https://img.shields.io/github/languages/count/SergeyPomelov/SmartHomeFrontEnd)
+![Github Repository Size](https://img.shields.io/github/repo-size/SergeyPomelov/SmartHomeFrontEnd)
+![Github Open Issues](https://img.shields.io/github/issues/SergeyPomelov/SmartHomeFrontEnd)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
 
 ## Development server
